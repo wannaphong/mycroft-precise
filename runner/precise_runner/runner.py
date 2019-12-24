@@ -164,7 +164,7 @@ class PreciseRunner(object):
         on_activation (Callable): callback for when the wake word is heard
     """
 
-    def __init__(self, engine, trigger_level=3, sensitivity=0.5, stream=None,
+    def __init__(self, engine, trigger_level=3, sensitivity=0.5,CHANNELS=1,input_device_index =0,rate =16000, stream=None,
                  on_prediction=lambda x: None, on_activation=lambda: None):
         self.engine = engine
         self.trigger_level = trigger_level
@@ -174,6 +174,9 @@ class PreciseRunner(object):
         self.chunk_size = engine.chunk_size
 
         self.pa = None
+        self.CHANNELS = CHANNELS
+        self.input_device_index = input_device_index
+        self.rate =rate
         self.thread = None
         self.running = False
         self.is_paused = False
@@ -195,7 +198,7 @@ class PreciseRunner(object):
             from pyaudio import PyAudio, paInt16
             self.pa = PyAudio()
             self.stream = self.pa.open(
-                16000, 1, paInt16, True, frames_per_buffer=self.chunk_size
+                self.rate, self.CHANNELS, format = paInt16, input =True, frames_per_buffer=self.chunk_size, input_device_index = self.input_device_index
             )
 
         self._wrap_stream_read(self.stream)
