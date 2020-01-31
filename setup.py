@@ -71,7 +71,7 @@ setup(
     },
     install_requires=[
         'numpy',
-        'tensorflow>=1.13,<1.14',  # Must be on piwheels
+        'tensorflow>=1.13,<1.15',  # Must be on piwheels
         'sonopy',
         'pyaudio',
         'keras',
@@ -85,7 +85,7 @@ setup(
         'bbopt',
         'speechpy-fast',
         'pyache',
-        'networkx==1.11',
-        'hyperopt==0.1.2'
+        'networkx',
+        'hyperopt'
     ]
 )
